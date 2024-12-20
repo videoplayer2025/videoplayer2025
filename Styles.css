@@ -197,14 +197,36 @@ input[type="range"]:focus {
   background: linear-gradient(to right, #4caf50, #ddd 0%); /* Color of progress bar */
 }
 
-/* Optional: Add hover effect for seek bar thumb */
+/* Hover effect for Seek Bar Thumb (Light Mode) */
 input[type="range"]:hover::-webkit-slider-thumb {
   background: #4caf50; /* Green thumb on hover */
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.7); /* Add a glow effect */
 }
 
 input[type="range"]:hover::-moz-range-thumb {
   background: #4caf50; /* Green thumb on hover */
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.7); /* Add a glow effect */
 }
+
+/* Dynamic adjustment for Dark Mode (if body has 'dark-theme' class) */
+body.dark-theme input[type="range"]::-webkit-slider-thumb {
+  background: #333; /* Darker thumb color for dark mode */
+}
+
+body.dark-theme input[type="range"]:hover::-webkit-slider-thumb {
+  background: #4caf50; /* Green thumb on hover in dark mode */
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.7); /* Add a glow effect */
+}
+
+body.dark-theme input[type="range"]::-moz-range-thumb {
+  background: #333; /* Darker thumb color for dark mode */
+}
+
+body.dark-theme input[type="range"]:hover::-moz-range-thumb {
+  background: #4caf50; /* Green thumb on hover in dark mode */
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.7); /* Add a glow effect */
+}
+
     /* Timestamp */
     #timeStamp {
       color: var(--on-primary-color);
