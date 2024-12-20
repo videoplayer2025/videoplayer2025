@@ -301,6 +301,15 @@ function updateSeekBarColor(progress) {
       }
     });
 
+  // Fullscreen Toggle using Double Tap on Video
+video.addEventListener('dblclick', () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    videoContainer.requestFullscreen();
+  }
+});
+
     // Settings Menu Toggle with Delay
     let settingsTimeout;
     settingsBtn.addEventListener('click', () => {
