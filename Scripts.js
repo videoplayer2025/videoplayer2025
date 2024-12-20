@@ -1,4 +1,4 @@
-    const video = document.getElementById('myVideo');
+    const video = document.getElementById('myVideo1');
     const playPauseBtn = document.getElementById('playPauseBtn');
     const seekBar = document.getElementById('seekBar');
     const timeStamp = document.getElementById('timeStamp');
@@ -16,7 +16,7 @@
     const videoControls = document.getElementById('videoControls');
     const subtitlesBtn = document.getElementById('subtitlesBtn');
     const resetProgressBtn = document.getElementById('resetProgressBtn');
-    // Unique identifier for the video
+    //Unique identifier for the video
     const videoId = 'myUniqueVideoId'; // Change this for each video
     const localStorageKey = `videoProgress-${videoId}`; // Key for saving progress
     const leftTapArea = document.getElementById('left-tap-area');
@@ -25,6 +25,7 @@
     const loadYoutubeVideoBtn = document.getElementById('loadYoutubeVideo');
     const loadYoutubeButton = document.getElementById('loadYoutubeVideo');
     const youtubePlayer = document.getElementById('youtubePlayer');
+        
 // Duration to rewind/forward
 const skipTime = 10; // 10 seconds
 
@@ -61,6 +62,9 @@ function showFeedback(message) {
     feedback.remove();
   }, 1000);
 }
+
+
+
 
 // Resume from saved progress
 window.addEventListener('load', () => {
@@ -518,3 +522,65 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
+    const sidebar = document.querySelector('.sidebar');
+ 
+
+
+   function toggleSidebar() {
+    const isOpen = sidebar.classList.contains('open');
+
+    // Toggle classes for sidebar and related elements
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('visible');
+    toggleSidebarBtn.classList.toggle('sidebar-open');
+    mainContent.classList.toggle('pushed');
+
+    // Update button text and icon after the class toggle
+    toggleSidebarBtn.innerHTML = !isOpen ? '✖ Close' : '☰ Menu';
+
+    // Add transition class to button for smooth animation
+    toggleSidebarBtn.classList.add('transitioning');
+    setTimeout(() => {
+        toggleSidebarBtn.classList.remove('transitioning');
+    }, 300); // Match transition duration in milliseconds
+}
+
+// Event Listener
+toggleSidebarBtn.addEventListener('click', toggleSidebar);
+
+// Close sidebar when clicking overlay
+    overlay.addEventListener('click', () => {
+        if (sidebar.classList.contains('open')) {
+            toggleSidebar();
+        }
+    });
+
+    
+   
+// Close sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+        if (sidebar.classList.contains('open') &&
+            !sidebar.contains(e.target) &&
+            e.target !== toggleSidebarBtn &&
+            !toggleSidebarBtn.contains(e.target)) {
+            toggleSidebar();
+        }
+    });
+
+    // Close sidebar with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+            toggleSidebar();
+        }
+    });
+
+    // Handle theme changes if theme toggle exists
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            toggleSidebarBtn.classList.toggle('light-theme');
+        });
+    }
+});
