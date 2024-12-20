@@ -217,6 +217,9 @@ videoControls.addEventListener('mouseleave', () => {
       const progress = (video.currentTime / video.duration) * 100;
       seekBar.value = progress;
 
+// Update the seek bar color dynamically
+    updateSeekBarColor(progress);
+
       const currentHours = Math.floor(video.currentTime / 3600);
       const currentMinutes = Math.floor((video.currentTime % 3600) / 60);
       const currentSeconds = Math.floor(video.currentTime % 60);
@@ -231,7 +234,18 @@ videoControls.addEventListener('mouseleave', () => {
     // Seek Bar input
     seekBar.addEventListener('input', () => {
       video.currentTime = (seekBar.value / 100) * video.duration;
+      
+ // Update the seek bar color dynamically during seek
+    updateSeekBarColor(progress);
+
+      
+
     });
+
+// Function to dynamically update the SeekBar color
+function updateSeekBarColor(progress) {
+  seekBar.style.background = `linear-gradient(to right, #4caf50 ${progress}%, var(--secondary-color) ${progress}%)`;
+}
 
    let volumeBarTimeout; // Variable to store the timeout for hiding the volume bar
 

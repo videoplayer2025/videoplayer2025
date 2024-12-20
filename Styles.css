@@ -151,36 +151,60 @@
       opacity: 1;
     }
 
-    /* Seek Bar Container */
-    #seekContainer {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 10px;
-      padding: 0 10px;
-    }
+/* Seek Bar Container */
+#seekContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
 
-    /* Seek Bar */
-    input[type="range"] {
-      -webkit-appearance: none;
-      height: 6px;
-      background: var(--secondary-color);
-      border-radius: 3px;
-      outline: none;
-      cursor: pointer;
-      width: 100%;
-      margin: 0;
-    }
+/* Seek Bar */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 6px;
+  background: var(--secondary-color); /* Default color */
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+  margin: 0;
+  transition: background 0.2s ease;
+}
 
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      background: white;
-      width: 4px;
-      height: 20px;
-      border-radius: 2px;
-      cursor: pointer;
-    }
+/* Handle for Seek Bar (Slider Thumb) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: white;
+  width: 9px;
+  height: 20px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
 
+input[type="range"]::-moz-range-thumb {
+  background: white;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Update the background dynamically for the seek bar */
+input[type="range"]:focus {
+  background: linear-gradient(to right, #4caf50, #ddd 0%); /* Color of progress bar */
+}
+
+/* Optional: Add hover effect for seek bar thumb */
+input[type="range"]:hover::-webkit-slider-thumb {
+  background: #4caf50; /* Green thumb on hover */
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+  background: #4caf50; /* Green thumb on hover */
+}
     /* Timestamp */
     #timeStamp {
       color: var(--on-primary-color);
@@ -244,7 +268,7 @@
     #volumeBar::-webkit-slider-thumb {
       -webkit-appearance: none;
       background: white;
-      width: 4px;
+      width: 9px;
       height: 20px;
       border-radius: 0;
       cursor: pointer;
