@@ -1,0 +1,809 @@
+:root {
+      --primary-color: #6750A4;
+      --on-primary-color: #FFFFFF;
+      --surface-color: #F4F0F8;
+      --secondary-color: #CAC4D0;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --border-radius: 12px;
+      --button-padding: 8px 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: var(--surface-color);
+    }
+   #videoContainer {
+      position: relative;
+      width: 85%;
+      max-width: 960px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 8px 16px var(--shadow-color);
+     
+    }
+
+    video {
+      max-height: 100vh;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+      object-fit: contain;
+      background: #000;
+    }
+
+    /* Add aspect ratio detection for portrait videos */
+    video.portrait {
+      width: auto;
+      height: 80vh;
+      max-width: 100%;
+    }
+
+    video.landscape {
+      width: 50%;
+      height: auto;
+      max-height: 80vh;
+    }
+
+    /* Fullscreen specific styles */
+    #videoContainer:fullscreen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      padding: 0;
+    }
+
+    #videoContainer:fullscreen video.portrait {
+      height: 100vh;
+      width: auto;
+      max-height: none;
+      object-fit: contain;
+      margin: 0;
+    }
+
+    #videoContainer:fullscreen video.landscape {
+      width: 100vw;
+      height: auto;
+      max-height: 100vh;
+      object-fit: contain;
+      margin: 0;
+    }
+
+    /* For Firefox which uses a different fullscreen selector */
+    #videoContainer:-moz-full-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+    }
+
+    #videoContainer:-moz-full-screen video.portrait {
+      height: 100vh;
+      width: auto;
+      max-height: none;
+      object-fit: contain;
+      margin: 0;
+    }
+
+    #videoContainer:-moz-full-screen video.landscape {
+      width: 100vw;
+      height: auto;
+      max-height: 100vh;
+      object-fit: contain;
+      margin: 0;
+    }
+
+    /* For Webkit browsers (Safari, Chrome) */
+    #videoContainer:-webkit-full-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+    }
+
+    #videoContainer:-webkit-full-screen video.portrait {
+      height: 100vh;
+      width: auto;
+      max-height: none;
+      object-fit: contain;
+      margin: 0;
+    }
+
+    #videoContainer:-webkit-full-screen video.landscape {
+      width: 100vw;
+      height: auto;
+      max-height: 100vh;
+      object-fit: contain;
+      margin: 0;
+    }
+    /* Controls */
+    #videoControls {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #videoContainer:hover #videoControls {
+      opacity: 1;
+    }
+
+    /* Seek Bar Container */
+    #seekContainer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+      padding: 0 10px;
+    }
+
+    /* Seek Bar */
+    input[type="range"] {
+      -webkit-appearance: none;
+      height: 6px;
+      background: var(--secondary-color);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      width: 100%;
+      margin: 0;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      background: white;
+      width: 4px;
+      height: 20px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    /* Timestamp */
+    #timeStamp {
+      color: var(--on-primary-color);
+      text-align: center;
+      font-size: 12px;
+      margin-left: 10px;
+      padding: 4px 12px;
+      background-color: dark grey;
+      border-radius: 50px;
+      display: inline-block;
+    }
+
+    /* Buttons */
+    button {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: var(--on-primary-color);
+      border: none;
+      padding: var(--button-padding);
+      margin: 4px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    /* Button Container */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      align-items: center;
+    }
+/* Volume Bar Container */
+
+    /* Volume Bar */
+    #volumeBar {
+      position: absolute;
+      top: -25px;
+      left: 82%;
+      transform: translateX(-100%);
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      width: 150px;
+      background: var(--secondary-color);
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      
+
+      
+       
+    }
+
+    #volumeBar::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      background: white;
+      width: 4px;
+      height: 20px;
+      border-radius: 0;
+      cursor: pointer;
+      box-shadow: 0 0 4px var(--shadow-color);
+    }
+
+    /* Volume Bar Visibility */
+    #volumeBtn:hover + #volumeBar {
+      opacity: 1;
+    }
+
+    /* Volume Toggle and Other Buttons Container */
+    .controls-wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .volume-container {
+      position: relative;
+    }
+
+    /* Settings Menu */
+    .settings-menu {
+      display: none;
+      position: absolute;
+      bottom: 120px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      padding: 8px;
+      box-shadow: 0 4px 8px var(--shadow-color);
+      color: var(--on-primary-color);
+    }
+
+    .settings-menu button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      color: var(--on-primary-color);
+      border: none;
+      padding: 6px;
+    }
+/* Light Mode Overrides for Settings Menu */
+[data-theme="light"] .settings-menu {
+  background: rgba(255, 255, 255, 0.9);  /* Lighter background for light mode */
+  color: var(--text-color);  /* Ensure text color is correct */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow for light mode */
+}
+
+/* Light Mode Overrides for Settings Menu Buttons */
+[data-theme="light"] .settings-menu button {
+  background-color: rgba(0, 0, 0, 0.11);  /* Light background for buttons */
+  color: #Ffffff;  /* Correct text color */
+  border: none;
+  padding: 6px;
+  width: 100%;
+  text-align: left;
+  border-radius: 4px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Button hover effect */
+[data-theme="light"] .settings-menu button:hover {
+  background-color: rgba(0, 0, 0, 0.2);  /* Darker background on hover */
+  transform: scale(1.05);
+}
+
+    #settingsBtn.active + .settings-menu {
+      display: block;
+    }
+
+    #pipBtn{
+       background-color: rgba(0, 0, 0, 0.1);
+
+      color: var(--on-primary-color);
+      border: none;
+      padding: var(--button-padding);
+      margin: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+      text-align: center;
+              
+
+}
+   #uploadSubtitleBtn{
+
+background-color: rgba(0, 0, 0, 0.1);
+      color: var(--on-primary-color);
+      border: none;
+      padding: var(--button-padding);
+      margin: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+      text-align: center;
+
+}
+
+    #subtitlesBtn{
+      background-color: rgba(0, 0, 0, 0.1);
+      color: var(--on-primary-color);
+      border: none;
+      padding: var(--button-padding);
+      margin: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+      text-align: center;
+}
+    #qualityBtn{
+      background-color: rgba(0, 0, 0, 0.1);
+      color: var(--on-primary-color);
+      border: none;
+      padding: var(--button-padding);
+      margin: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+      text-align: center;
+}
+    #resetProgressBtn{
+
+      background-color: rgba(0, 0, 0, 0.1);
+
+      color: var(--on-primary-color);
+      border: none;
+      padding: var(--button-padding);
+      margin: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+      text-align: center;
+
+
+}
+
+    /* Upload Button Container */
+    #uploadBtn {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: var(--on-primary-color);
+      border: none;
+      padding: var(--button-padding);
+      margin: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+      text-align: center;
+    }
+
+    #uploadBtn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+    #pipBtn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    #subtitlesBtn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    #qualityBtn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    #resetProgressBtn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+/* Oval Play Button */
+    .oval-play-button {
+      width: 100px;
+      height: 40px;
+      border-radius: 25px;
+      background-color: white;
+      color: black;
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 8px var(--shadow-color);
+    }
+
+    .oval-play-button:hover {
+      background-color: black;
+      color: white;
+      transform: scale(1.1);
+    }
+/* Theme Toggle Button */
+#themeToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: var(--on-primary-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+#themeToggle:hover {
+  transform: scale(1.05);
+  background-color: var(--secondary-color);
+}
+   
+ /* Dark Mode Overrides */
+[data-theme="dark"] {
+  --primary-color: #9373D4;
+  --on-primary-color: #FFFFFF;
+  --surface-color: #121212;
+  --secondary-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --text-color: #FFFFFF;
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] {
+  --primary-color: #6750A4;
+  --on-primary-color: #000000;
+  --surface-color: #FFFFFF;
+  --secondary-color: #E0E0E0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --text-color: #000000;
+}
+       @media (max-width: 768px) {
+      #videoControls {
+        opacity: 1;
+        flex-direction: column;
+        padding: 5px;
+      }
+
+      button {
+        padding: 6px 10px;
+        font-size: 14px;
+      }
+
+      #timeStamp {
+        font-size: 12px;
+      }
+    }
+h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-top: -640px; /* Fixed the invalid unit */
+  color: black;
+  background-color: #fff;
+  position: absolute;
+  right: 580px;
+  width: auto;
+  font-weight: bold;
+  padding: 8px 16px; /* Added padding for better visual appearance */
+  border-radius: 4px; /* Added slight rounding to corners */
+  z-index: 10; /* Ensure title appears above other elements */
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] h1 {
+  color: #fff;
+  background-color: #121212;
+}
+  #left-tap-area,
+#right-tap-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20%; /* Each area covers half the screen */
+  cursor: pointer;
+}
+
+#left-tap-area {
+  left: 0;
+}
+
+#right-tap-area {
+  right: 0;
+}
+  .sidebar {
+            width: 300px;
+            background-color: #f5f5f5;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            border-radius: 0 20px 20px;
+            margin: 20px 20px 20px 0;
+            height: 95vh;
+        }
+/* Custom Scrollbar Styling */
+        .sidebar::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+            border: 2px solid #f1f1f1;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+
+        .sidebar h2 {
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .feature-section {
+            margin-bottom: 20px;
+        }
+
+        .feature-section h3 {
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .feature-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .feature-item h4 {
+            color: #2196F3;
+            margin: 0 0 10px 0;
+        }
+
+        .feature-item p {
+            margin: 0;
+            color: #666;
+            line-height: 1.5;
+        }
+
+/* Dark mode overrides for video controls */
+[data-theme="dark"] #videoControls {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="dark"] .oval-play-button {
+  background-color: #9373D4;
+  color: white;
+  box-shadow: 0 0 20px rgba(147, 115, 212, 0.5);
+}
+
+[data-theme="dark"] .oval-play-button:hover {
+  background-color: #AB91E8;
+  transform: scale(1.1);
+}
+
+/* Dark mode overrides for sidebar */
+[data-theme="dark"] .sidebar {
+  background-color: #1E1E1E;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .sidebar h2 {
+  color: #FFFFFF;
+  border-bottom: 2px solid #333;
+}
+
+[data-theme="dark"] .sidebar h3 {
+  color: #E0E0E0;
+}
+
+[data-theme="dark"] .feature-item {
+  background-color: #2D2D2D;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .feature-item h4 {
+  color: #9373D4;
+}
+
+[data-theme="dark"] .feature-item p {
+  color: #CCCCCC;
+}
+
+[data-theme="dark"] .sidebar::-webkit-scrollbar-track {
+  background: #2D2D2D;
+}
+
+[data-theme="dark"] .sidebar::-webkit-scrollbar-thumb {
+  background: #4D4D4D;
+  border: 2px solid #2D2D2D;
+}
+
+[data-theme="dark"] .sidebar::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+* Light mode fixes for buttons and timestamp */
+[data-theme="light"] button {
+  background-color: rgba(103, 80, 164, 0.1);
+  color: #000000;
+}
+
+[data-theme="light"] button:hover {
+  background-color: rgba(103, 80, 164, 0.2);
+}
+
+[data-theme="light"] #timeStamp {
+  color: #fff;
+  background-color: rgba(103, 80, 164, 0.1);
+}
+
+[data-theme="light"] #volumeBar {
+  background: #E0E0E0;
+}
+
+[data-theme="light"] #volumeBar::-webkit-slider-thumb {
+  background: #6750A4;
+}
+
+[data-theme="light"] input[type="range"] {
+  background: #E0E0E0;
+}
+
+[data-theme="light"] input[type="range"]::-webkit-slider-thumb {
+  background: #6750A4;
+}
+
+/* Control buttons specific overrides for light mode */
+[data-theme="light"] #pipBtn,
+[data-theme="light"] #subtitlesBtn,
+[data-theme="light"] #qualityBtn,
+[data-theme="light"] #resetProgressBtn,
+[data-theme="light"] #uploadBtn,
+[data-theme="light"] #uploadSubtitleBtn,
+[data-theme="light"] #switchToLocalBtn,
+[data-theme="light"] #switchToYouTubeBtn{
+  background-color: #6750A4;
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+[data-theme="light"] #pipBtn:hover,
+[data-theme="light"] #subtitlesBtn:hover,
+[data-theme="light"] #qualityBtn:hover,
+[data-theme="light"] #resetProgressBtn:hover,
+[data-theme="light"] #uploadBtn:hover,
+[data-theme="light"] #uploadSubtitleBtn:hover,
+[data-theme="light"] #switchToLocalBtn:hover,
+[data-theme="light"] #switchToYouTubeBtn:hover {
+  background-color: #BEBEBE;
+  transform: translateY(-1px);
+}
+
+/* Dark mode overrides for uploadSubtitleBtn */
+[data-theme="dark"] #uploadSubtitleBtn {
+  background-color: #2D2D2D;
+  color: #FFFFFF;
+  border: 1px solid #4D4D4D;
+}
+
+[data-theme="dark"] #uploadSubtitleBtn:hover {
+  background-color: #3D3D3D;
+  border-color: #666666;
+}
+
+/* Dark mode overrides for switchToLocalBtn */
+[data-theme="dark"] #switchToLocalBtn {
+  background-color: #2D2D2D;
+  color: #FFFFFF;
+  border: 1px solid #4D4D4D;
+}
+
+[data-theme="dark"] #switchToLocalBtn:hover {
+  background-color: #3D3D3D;
+  border-color: #666666;
+}
+
+/* Dark mode overrides for switchToYouTubeBtn */
+[data-theme="dark"] #switchToYouTubeBtn {
+  background-color: #2D2D2D;
+  color: #FFFFFF;
+  border: 1px solid #4D4D4D;
+}
+
+[data-theme="dark"] #switchToYouTubeBtn:hover {
+  background-color: #3D3D3D;
+  border-color: #666666;
+}
+
+
+/* Initially make the YouTube input and load button visible */
+#youtubeInputContainer {
+  margin-bottom: 20px;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+#youtubeUrl, #loadYoutubeVideo {
+  width: 60%;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#youtubeInputContainer.hidden {
+  opacity: 0;
+  pointer-events: none; /* Disable interaction when hidden */
+}
+
+#youtubePlayer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Reappear the YouTube input container when hovering over the top part of the video player */
+#youtubePlayer:hover + #youtubeInputContainer {
+  opacity: 1;
+  pointer-events: auto; /* Enable interaction when hovering */
+}
+
+/* Add the new buttons to the button container */
+#switchToLocalBtn, 
+#switchToYouTubeBtn {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--on-primary-color);
+  border: none;
+  padding: var(--button-padding);
+  margin: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  text-align: center;
+}
+
+#switchToLocalBtn:hover,
+#switchToYouTubeBtn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}

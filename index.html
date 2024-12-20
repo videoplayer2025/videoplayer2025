@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Video Player</title>
+  <link rel="stylesheet" href="Styles.css">
+  <link rel="icon" type="images/x-icon" href="P.ico">
+   <link rel="icon" type="images/png" href="P.png">
+   <link rel="icon" sizes="16x16" href="M-16x16.png">
+   <link rel="icon" sizes="32x32" href="M-32x32.png">
+   <link rel="icon" sizes="48x48" href="M-48x48.png">
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+
+<body>
+<div class="sidebar">
+        <h2>Enhanced Video Player Features</h2>
+        
+        <div class="feature-section">
+            <h3>Basic Controls</h3>
+            
+            <div class="feature-item">
+                <h4>Video Tap Controls</h4>
+                <p>• Tap center: Play/Pause video</p>
+                <p>• Tap left side: Rewind 10 seconds</p>
+                <p>• Tap right side: Forward 10 seconds</p>
+            </div>
+
+            <div class="feature-item">
+                <h4>Timeline Controls</h4>
+                <p>• Drag seekbar to navigate through video</p>
+                <p>• Current time and duration display</p>
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <h3>Advanced Features</h3>
+            
+            <div class="feature-item">
+                <h4>Playback Options</h4>
+                <p>• Adjustable playback speed (1x button)</p>
+                <p>• Picture-in-Picture mode</p>
+                <p>• Full screen toggle</p>
+            </div>
+
+            <div class="feature-item">
+                <h4>Audio Controls</h4>
+                <p>• Volume slider adjustment</p>
+                <p>• Mute/Unmute toggle</p>
+            </div>
+
+            <div class="feature-item">
+                <h4>Subtitle Support</h4>
+                <p>• Upload custom SRT subtitles</p>
+                <p>• Toggle subtitles on/off</p>
+                <p>• Multiple language support</p>
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <h3>Additional Options</h3>
+            
+            <div class="feature-item">
+                <h4>Video Management</h4>
+                <p>• Upload custom videos</p>
+                <p>• Quality selection</p>
+                <p>• Reset progress to beginning</p>
+            </div>
+        </div>
+    </div>
+        <div id="videoContainer">
+        
+        
+
+    <video id="myVideo">
+      <source src="video.mp4" type="video/mp4">
+      <track src="subtitles.vtt" kind="subtitles" srclang="en" label="English" default>
+    </video>
+      <div id="left-tap-area"></div>
+      <div id="right-tap-area"></div>
+
+    <!-- Controls -->
+    <div id="videoControls">
+      <div id="seekContainer">
+        <input type="range" id="seekBar" min="0" max="100" value="0">
+      </div>
+
+      <!-- Control Buttons -->
+      <div class="controls-wrapper">
+        <div class="button-container">
+          <button id="playPauseBtn" class="oval-play-button" aria-label="Play/Pause">▶</button>
+          <button id="rewindBtn">⏪ 10s</button>
+          <button id="forwardBtn">10s ⏩</button>
+          <div id="timeStamp">00:00 / 00:00</div>
+        </div>
+
+        <div class="button-container">
+        
+          <div class="volume-container">
+            <button id="volumeBtn">🔊</button>
+                  </div>
+     <!-- Other controls -->
+    <button id="playbackBtn">1x</button>
+    <button id="settingsBtn">⚙️</button>
+    <button id="fullscreenBtn">⛶</button>
+       </div>
+      </div>
+<div class="button-container">
+ <!-- Subtitle Upload -->
+    <div>
+      <button id="uploadSubtitleBtn">Upload Subtitle (.srt)</button>
+      <input type="file" id="subtitleInput" accept=".srt" style="display:none;">
+    </div>
+        <button id="switchToLocalBtn">Switch to Local Video</button>
+        <button id="switchToYouTubeBtn">Switch to YouTube Video</button>
+   </div>
+      <!-- Volume Bar -->
+      <input type="range" id="volumeBar" min="0" max="1" step="0.1" value="1">
+    </div>
+
+    <!-- Upload Button Container -->
+    <div id="uploadContainer">
+      <input type="file" id="uploadInput" accept="video/mp4" style="display: none;">
+    </div>
+
+    <!-- Settings Menu -->
+    <div class="settings-menu">
+      <button id="pipBtn">Picture in Picture 🖼️</button>
+      <button id="subtitlesBtn">CC</button>
+      <button id="qualityBtn">Quality</button>
+      <button id="uploadBtn">Upload Video</button>
+      <button id="resetProgressBtn">Restart movie/video From Begining</button>
+    </div>
+  </div>
+
+    <!-- External JavaScript File -->
+    <script src="Scripts.js"></script>
+ 
+
+
+<!-- Add Theme Toggle Button -->
+  <button id="themeToggle">🌙 Toggle Theme</button>
+
+</body>
+</html>
